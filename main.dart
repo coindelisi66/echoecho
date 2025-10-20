@@ -1,38 +1,38 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(EchoEchoApp());
+  runApp(EchoMintApp());
 }
 
-class EchoEchoApp extends StatelessWidget {
+class EchoMintApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'EchoEcho',
-      theme: ThemeData(primarySwatch: Colors.purple),
-      home: EchoScreen(),
+      title: 'EchoMint',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: MintScreen(),
     );
   }
 }
 
-class EchoScreen extends StatefulWidget {
+class MintScreen extends StatefulWidget {
   @override
-  _EchoScreenState createState() => _EchoScreenState();
+  _MintScreenState createState() => _MintScreenState();
 }
 
-class _EchoScreenState extends State<EchoScreen> {
-  final TextEditingController _castController = TextEditingController();
-  String echoMessage = 'Henüz echo yok!';
-  List<String> echoChain = [];
+class _MintScreenState extends State<MintScreen> {
+  final TextEditingController _uriController = TextEditingController();
+  String mintMessage = 'Henüz NFT mint edilmedi!';
+  List<String> mintList = [];
 
-  void _addEcho() {
+  void _addMint() {
     setState(() {
-      if (_castController.text.isNotEmpty) {
-        echoChain.add(_castController.text);
-        echoMessage = 'Echo eklendi: ${_castController.text}';
-        _castController.clear();
+      if (_uriController.text.isNotEmpty) {
+        mintList.add(_uriController.text);
+        mintMessage = 'NFT mint edildi: ${_uriController.text}';
+        _uriController.clear();
       } else {
-        echoMessage = 'Lütfen bir cast URL’si gir!';
+        mintMessage = 'Lütfen bir URI gir!';
       }
     });
   }
@@ -40,33 +40,33 @@ class _EchoScreenState extends State<EchoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('EchoEcho - Hikaye Zinciri')),
+      appBar: AppBar(title: Text('EchoMint - NFT Hikaye')),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: [
             TextField(
-              controller: _castController,
+              controller: _uriController,
               decoration: InputDecoration(
-                labelText: 'Farcaster Cast URL’si',
+                labelText: 'Hikaye URI’si gir',
                 border: OutlineInputBorder(),
               ),
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _addEcho,
-              child: Text('Echo Ekle'),
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.purple),
+              onPressed: _addMint,
+              child: Text('NFT Mint Et'),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
             ),
             SizedBox(height: 20),
-            Text(echoMessage, style: TextStyle(fontSize: 18)),
+            Text(mintMessage, style: TextStyle(fontSize: 18)),
             SizedBox(height: 20),
             Expanded(
               child: ListView.builder(
-                itemCount: echoChain.length,
+                itemCount: mintList.length,
                 itemBuilder: (context, index) => ListTile(
-                  title: Text(echoChain[index]),
-                  subtitle: Text('Echo #${index + 1}'),
+                  title: Text(mintList[index]),
+                  subtitle: Text('NFT #${index + 1}'),
                 ),
               ),
             ),
